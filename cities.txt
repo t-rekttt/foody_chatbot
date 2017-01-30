@@ -1,0 +1,112 @@
+ID, HREF, CITY-NAME
+217,/ho-chi-minh,Ho Chi Minh
+218,/ha-noi,Ha Noi
+219,/da-nang,Da Nang
+221,/can-tho,Can Tho
+248,/khanh-hoa,Khanh Hoa
+223,/vung-tau,Vung Tau
+220,/hai-phong,Hai Phong
+233,/binh-thuan,Binh Thuan
+254,/lam-dong,Lam Dong
+222,/dong-nai,Dong Nai
+265,/quang-ninh,Quang Ninh
+273,/hue,Hue
+230,/binh-duong,Binh Duong
+244,/hai-duong,Hai Duong
+259,/ninh-thuan,Ninh Thuan
+256,/nam-dinh,Nam Dinh
+274,/tien-giang,Tien Giang
+250,/kon-tum,Kon Tum
+263,/quang-nam,Quang Nam
+253,/lao-cai,Lao Cai
+257,/nghe-an,Nghe An
+255,/long-an,Long An
+231,/binh-dinh,Binh Dinh
+249,/kien-giang,Kien Giang
+224,/an-giang,An Giang
+236,/dak-lak,Dak Lak
+239,/dong-thap,Dong Thap
+277,/vinh-long,Vinh Long
+234,/ca-mau,Ca Mau
+240,/gia-lai,Gia Lai
+269,/tay-ninh,Tay Ninh
+267,/soc-trang,Soc Trang
+229,/ben-tre,Ben Tre
+275,/tra-vinh,Tra Vinh
+232,/binh-phuoc,Binh Phuoc
+264,/quang-ngai,Quang Ngai
+225,/bac-lieu,Bac Lieu
+228,/bac-ninh,Bac Ninh
+278,/vinh-phuc,Vinh Phuc
+261,/phu-yen,Phu Yen
+272,/thanh-hoa,Thanh Hoa
+258,/ninh-binh,Ninh Binh
+227,/bac-giang,Bac Giang
+245,/hau-giang,Hau Giang
+266,/quang-tri,Quang Tri
+243,/ha-tinh,Ha Tinh
+271,/thai-nguyen,Thai Nguyen
+262,/quang-binh,Quang Binh
+260,/phu-tho,Phu Tho
+270,/thai-binh,Thai Binh
+252,/lang-son,Lang Son
+241,/ha-giang,Ha Giang
+237,/dak-nong,Dak Nong
+247,/hung-yen,Hung Yen
+246,/hoa-binh,Hoa Binh
+276,/tuyen-quang,Tuyen Quang
+268,/son-la,Son La
+242,/ha-nam,Ha Nam
+279,/yen-bai,Yen Bai
+235,/cao-bang,Cao Bang
+238,/dien-bien,Dien Bien
+251,/lai-chau,Lai Chau
+226,/bac-kan,Bac Kan
+285,/bangkok,Bangkok
+321,/nonthaburi,Nonthaburi
+348,/nakhon-ratchasima,Nakhon Ratchasima
+427,/prachuap-khiri-khan,Prachuap Khiri Khan
+363,/samut-prakan,Samut Prakan
+425,/Krabi,Krabi
+426,/Chachoengsao,Chachoengsao
+286,/pattaya,Chon Buri
+287,/chiangmai,Chiangmai
+288,/phuket,Phuket
+310,/jakarta,Jakarta
+311,/bali,Bali
+424,/Yogyakarta,Yogyakarta
+316,/phnom-penh,Phnom Penh
+317,/siem-reap,Siem Reap
+323,/kampot,Kampot
+383,/kampong-cham,Kampong Cham
+382,/kampong-thom,Kampong Thom
+283,/preah-sihanouk,Preah Sihanouk
+400,/svay-rieng,Svay Rieng
+381,/prey-veng,Prey Veng
+403,/Malacca,Malacca
+404,/Johor,Johor
+319,/Selangor,Selangor
+309,/kuala-lumpur,Kuala Lumpur
+367,/putra-jaya,Putra Jaya
+300,/yangon,Yangon
+371,/Mandalay,Mandalay
+380,/Shan,Shan
+302,/New South Wales,New South Wales
+301,/Victoria,Victoria
+303,/Queensland,Queensland
+335,/South Australia,South Australia
+305,/Western Australia,Western Australia
+9,/california,California
+59,/washington,Washington
+41,/new-york,New York
+299,/taipei,Taipei City
+338,/Pingtung-county,Pingtung County
+420,/taoyuan-city,Taoyuan City
+284,/singapore,Singapore
+333,/hong-kong,Hong Kong City
+296,/tokyo,Tokyo
+297,/kyoto,Kyoto
+298,/osaka,Osaka
+416,/Kyushu,Kyushu
+314,/metro-manila,Metro Manila
+312,/seoul,Seoul

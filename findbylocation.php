@@ -1,7 +1,9 @@
 <?php
 #error_reporting(E_ALL); 
 #ini_set('display_errors', 1);
-define('ROOT', __DIR__ . DIRECTORY_SEPARATOR);
+require("citymatch.php");
+require('pre-funcs.php');
+/*define('ROOT', __DIR__ . DIRECTORY_SEPARATOR);
 require_once ROOT . 'vendor/autoload.php';
 Requests::register_autoloader();
 
@@ -9,15 +11,40 @@ function _sendRequest($url)
 {
   $res = Requests::get($url, array('X-Requested-With' => 'XMLHttpRequest'));
   return $res->status_code === 200 ? $res->body : FALSE;
-}
+}*/
 
-if (isset($_GET['lat']) && isset($_GET['lon']) && isset($_GET['cityId'])) {
+if (isset($_GET['lat']) && isset($_GET['lon']) /*&& isset($_GET['cityId'])*/) {
+  header('Content-Type: application/json');
   $lat=$_GET['lat'];
   $lon=$_GET['lon'];
-  $count=9;
+  $count=10;
   $type=3;
   $page=1;
-  $cityId=$_GET['cityId'];
+  $cityId= city_match($lat,$lon);
+  if ($cityId=="0") {
+    $messages = ["messages"=> 
+        [
+          [
+            "attachment"=>[
+              "type"=> "template",
+              "payload"=>[
+                "template_type"=>"button",
+                "text"=>"Vị trí bạn cần tìm chưa có trên hệ thống",
+                "buttons"=>[
+                  [
+                    "type"=>"show_block",
+                    "block_name"=>"menu",
+                    "title"=>"Trở về menu"
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ]
+      ];
+    echo json_encode($messages);
+    exit();
+  }
   if (isset($_GET['page'])) {
     $page = $_GET['page'];
   }
@@ -30,10 +57,13 @@ if (isset($_GET['lat']) && isset($_GET['lon']) && isset($_GET['cityId'])) {
     'cityId' =>$cityId
   );
   $query_str = http_build_query($query_arr);
-  header('Content-Type: application/json');
   $data = _sendRequest('https://www.foody.vn/__get/Place/HomeListPlace?'.$query_str);
   $base_arr = 
     [
+      "set_attributes"=>
+        [
+          "cityId"=>$cityId
+        ],
       "messages"=> [
         [
           "attachment"=>[
@@ -49,13 +79,35 @@ if (isset($_GET['lat']) && isset($_GET['lon']) && isset($_GET['cityId'])) {
   $json = json_decode($data,true);
   //print_r($json);
   //echo $json["CityId"];
+  if (count($json["Items"])===0) {
+    $messages = ["messages"=> 
+        [
+          [
+            "attachment"=>[
+              "type"=> "template",
+              "payload"=>[
+                "template_type"=>"button",
+                "text"=>"Đã hết kết quả tìm kiếm phù hợp với yêu cầu",
+                "buttons"=>[
+                  [
+                    "type"=>"show_block",
+                    "block_name"=>"menu",
+                    "title"=>"Trở về menu"
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ]
+      ];
+    echo json_encode($messages);
+    exit;
+  }
+
   foreach ($json['Items'] as $item) {
     $Name = $item["Name"];
     $Address = $item['Address'];
     $AvgRatingText = $item['AvgRatingText'];
-    if ($AvgRatingText = '-.-') {
-      $AvgRatingText = 'Chưa có';
-    }
     $PhotoUrl = $item['PhotoUrl'];
     $url = "https://www.foody.vn".$item["Url"];
     //echo $Address.PHP_EOL.$AvgRatingText.PHP_EOL.$PhotoUrl;
@@ -63,30 +115,43 @@ if (isset($_GET['lat']) && isset($_GET['lon']) && isset($_GET['cityId'])) {
       [
         "title"=>$Name,
         "image_url"=>$PhotoUrl,
-        "subtitle"=>"Address: ".$Address.PHP_EOL."Rating: ".$AvgRatingText,
+        "subtitle"=>"Địa chỉ: ".$Address.PHP_EOL."Đánh giá: ".$AvgRatingText,
         "buttons"=> [[
           "type"=>"web_url",
           "url"=>$url,
           "title"=>"Mở trên web"
-        ]]
+        ],
+        ["type"=>"element_share"]
+        ]
       ];
   }
 
-  $base_arr["messages"][0]["attachment"]["payload"]["elements"][] = [
+  $first_url = $json['Items'][0]["PhotoUrl"];
+  /*$base_arr["messages"][0]["attachment"]["payload"]["elements"][] = [
       "title"=>"Xem thêm những địa điểm khác",
+      "subtitle"=>" ",
+      "image_url"=>$first_url,
       "buttons"=>[[
         "set_attributes" =>
         [
           "page"=>$page+1
         ],
         "title"=>"Xem thêm",
+        "image_url"=>$first_url,
         "type"=>"show_block",
         "block_name"=>"query"
       ]]
-    ];
-
-  if (count($json["Items"])===0) {
-    $base_arr = ["messages"=>[["text"=>"Đã hết địa điểm phù hợp với yêu cầu"]]];
-  }
+    ];*/
+  $base_arr["messages"][0]["attachment"]["payload"]["elements"][0]["buttons"][] = 
+      [
+        "set_attributes" =>
+        [
+          "page"=>$page+1
+        ],
+        "title"=>"Xem thêm địa điểm",
+        "image_url"=>$first_url,
+        "type"=>"show_block",
+        "block_name"=>"query"
+      ];
   echo json_encode($base_arr);
 }
