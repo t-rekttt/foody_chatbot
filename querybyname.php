@@ -1,9 +1,10 @@
 <?php
   require("pre-funcs.php");
   header('Content-Type: application/json');
-  if (isset($_GET['cityId']) && isset($_GET['query'])) {
+  if (isset($_GET['cityId']) && isset($_GET['query']) && isset($_GET['href'])) {
     $cityId=$_GET['cityId'];
     $query=$_GET['query'];
+    $href=$_GET['href'];
     $page=1;
     if (isset($_GET['page'])) {
       $page = $_GET['page'];
@@ -18,7 +19,7 @@
     ];
 
     $query_str = http_build_query($query_arr);
-    $data = _sendRequest('https://www.foody.vn/ha-noi/dia-diem?'.$query_str);
+    $data = _sendRequest('https://www.foody.vn'.$href.'/dia-diem?'.$query_str);
     $json = json_decode($data,1);
     $searchItems = $json["searchItems"];
     if (count($searchItems)===0) {

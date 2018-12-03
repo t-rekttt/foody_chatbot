@@ -1,8 +1,8 @@
 <?php
 #error_reporting(E_ALL); 
 #ini_set('display_errors', 1);
-require("citymatch.php");
-require('pre-funcs.php');
+require_once("citymatch.php");
+require_once("pre-funcs.php");
 /*define('ROOT', __DIR__ . DIRECTORY_SEPARATOR);
 require_once ROOT . 'vendor/autoload.php';
 Requests::register_autoloader();
@@ -13,9 +13,9 @@ function _sendRequest($url)
   return $res->status_code === 200 ? $res->body : FALSE;
 }*/
 
+header('Content-Type: application/json');
 function find_old() {
   if (isset($_GET['lat']) && isset($_GET['lon']) /*&& isset($_GET['cityId'])*/) {
-    header('Content-Type: application/json');
     $lat=$_GET['lat'];
     $lon=$_GET['lon'];
     $count=10;
@@ -160,7 +160,6 @@ function find_old() {
 
 function find_new() {
   if (isset($_GET["string"])) {
-    header('Content-Type: application/json');
     $string=$_GET["string"];
     $count=10;
     $type=3;
@@ -225,8 +224,6 @@ function find_new() {
         ]
       ];
     $json = json_decode($data,true);
-    //print_r($json);
-    //echo $json["CityId"];
     if (count($json["Items"])===0) {
       $messages = ["messages"=> 
           [

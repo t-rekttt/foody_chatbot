@@ -1,4 +1,5 @@
 <?php
+	require_once("pre-funcs.php");
 	function city_match ($lat,$long)
 	{
 		$API_KEY = 'AIzaSyB0d2WX4lJsBznn8EUK52xCE0RYCYjoAYI';
@@ -30,10 +31,10 @@
 	{
 		$API_KEY = 'AIzaSyB0d2WX4lJsBznn8EUK52xCE0RYCYjoAYI';
 		$csv = array_map('str_getcsv', file('cities.txt'));
-		if (strpos($string, "http://www.google.com/maps/place/")) {
-			$coors = explode("http://www.google.com/maps/place/", $string)[0];
-			$json = json_decode($data,1);
+		if (strpos($string, "http://www.google.com/maps/place/")!==FALSE) {
+			$coors = explode("http://www.google.com/maps/place/", $string)[1];
 			$data = _sendRequest("https://maps.googleapis.com/maps/api/geocode/json?latlng=".$coors);
+			$json = json_decode($data,1);
 			$lat = explode(",", $coors)[0];
 			$long = explode(",", $coors)[1];
 			$status = $json["status"];
@@ -67,6 +68,7 @@
 			$data_name = format($data[2]);
 			if (strpos($temp_name,$data_name)!==FALSE) {
 				$city = $data[0];
+				$href = $data[1];
 				$status = TRUE;
 				break;
 			}
@@ -78,7 +80,8 @@
 			"status"=>TRUE,
 			"cityId"=>$city,
 			"lat"=>$lat,
-			"long"=>$long
+			"long"=>$long,
+			"href"=>$href
 		];
 		return $result_arr;
 	}
